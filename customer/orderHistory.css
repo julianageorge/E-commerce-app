@@ -1,0 +1,21 @@
+.order-item{
+    width:600px;
+    height: fit-content;
+    border-radius: 10px;
+    box-shadow: 2px 2px 8px rgba(236, 20, 20, 0.1);
+    padding: 10px;
+    margin: auto;
+
+}
+
+.order-image{
+    width: 50%;
+    margin-left: 100px;
+}
+
+.orderData{
+    background-color: rgb(251, 234, 241);
+    padding: 20px;
+   
+}
+

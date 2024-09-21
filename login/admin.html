@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="Master.css">
+    <title>Document</title>
+</head>
+<body>
+    <header class="head">
+        <nav class="Nav">
+            <a href="#" class="Nav_logo">Ecommerce</a>
+            <ul class="Nav_items">
+                <li class="Nav_item">
+                    <a href="#">Home</a>
+                    <a href="#">About</a>
+                    <a href="#">Products</a>
+                    <a href="#">Contact</a>
+                </li>
+            </ul>
+            <button class="logoutbtn" id="logout">Logout</button>
+        </nav>
+    </header>
+    <div class="home"></div>
+    <script>
+        const logoutbtn=document.getElementById("logout");
+        logoutbtn.addEventListener("click",(e)=>{
+            e.preventDefault();
+            logout();
+        });
+        function logout(){
+            window.location.href="login.html";
+        }
+        </script>
+</body>
+</html>

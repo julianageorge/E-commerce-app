@@ -1,0 +1,284 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+
+*{
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.head{
+    position: fixed;
+    z-index: 100; 
+    height: 80px;
+    width: 100%;
+    padding:0 20px ;
+}
+.Nav{
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+}
+.Nav_item,.Nav{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+}
+a{
+    text-decoration: none;
+}
+.Nav_item{
+    column-gap:20px;
+    font-size: 18px;
+    font-weight: 100;
+
+}
+
+.Nav_item a,.Nav_logo,.login_button{
+ color: white;
+}
+
+.Nav_logo{
+    font-size: 25px;
+}
+.Nav_item :hover,.Nav_logo:hover{
+    color: rgb(4, 4, 50);
+}
+.home{
+    position: relative;
+    height: 100vh;
+    width:100%;
+    background-image: url(loginbackground.jpg);
+    background-size: cover;
+    background-position: center;
+
+}
+.login_button{
+    background:transparent;
+    border: 2px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 5px 25px;
+    color: white;
+}
+.login_button:active{
+transform: scale(0.99);
+}
+.container{
+    position: absolute;
+    top:50%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%,-50%) scale(1.2);
+    z-index: 101;
+    border-radius: 12px;
+    background-color: aliceblue;
+    padding: 25px;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+    max-width: 350px;
+    pointer-events: none;
+    opacity: 0;
+    transition:all 0.4s ease-out;
+
+}
+.home.show .container {
+    opacity:1;
+    pointer-events: auto;
+    transform: translate(-50%,-50%) scale(1);
+}
+.home::before{
+    content: "";
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    width: 100%;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.5s ease-out;
+}
+.home.show::before{
+    opacity: 1;
+    pointer-events: auto;
+}
+.close{
+    position: absolute;
+    top:10px;
+    right: 28px;
+    color: black;
+    font-size: 20px;
+    opacity: 0.7;
+    cursor: 23;
+}
+.form h2{
+    color:rgb(4, 4, 50);
+    font-size: 22px;
+    text-align: center;
+}
+.Input{
+    position: relative;
+    width: 100%;
+    margin-top: 30px;
+    height: 40px;
+}
+.Input input{
+    height: 100%;
+    width: 80%;
+    border: none;
+    padding: 0 30px;
+    transition:all 0.2s ease;
+    border-bottom: 1.6px solid gray ;
+    outline: none;
+}
+.Input i{
+    position: absolute;
+    top:50%;
+    transform: translateY(-50%);
+    font-size: 15px;
+}
+.Input i.email,
+.Input i.fa-lock{
+    left: 0;
+}
+
+.Input input:focus{
+    border-color: rgb(4, 4, 50);
+}
+.valid{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+.checkbox{
+display: flex;
+white-space: nowrap;
+gap: 6px;
+font-size: 12px;
+user-select: none;
+cursor: pointer;
+}
+.form a{
+    font-size: 12px;
+    color: rgb(4, 4, 50);
+}
+.form a:hover{
+    text-decoration: underline;
+}
+.checkbox label{
+    cursor: pointer;
+}
+.checkbox input{
+    accent-color:rgb(4, 4, 50);
+}
+.logbutt,.signupbutton{
+    background-color:rgb(4, 4, 50);
+    color: white;
+    width:100%;
+    padding: 10px 0;
+    margin-top: 30px;
+    border-radius:10px ;
+}
+.signup{
+    font-size: 12px;
+    text-align: center;
+    margin-top: 15px;
+}
+.signupform{
+    display: none;
+}
+.container.activesignup .signupform{
+    display: block;
+}
+.container.activesignup .login{
+    display: none;
+}
+
+.forgetpass{
+    display: none;
+}
+.container.forgotpassword-active .forgetpass {
+    display: block; 
+}
+.forgetpass .title {
+    color: rgb(4, 4, 50);
+    font-size: 22px;
+    text-align: center;
+}
+.resetButton {
+    background-color: rgb(4, 4, 50);
+    color: white;
+    width: 100%;
+    padding: 10px 0;
+    margin-top: 30px;
+    border-radius: 10px;
+}
+.back-to-login {
+    font-size: 12px;
+    text-align: center;
+    margin-top: 15px;
+}
+.forgetpass a{
+    color:rgb(4, 4, 50);
+}
+.container.forgotpassword-active .login{
+    display: none;
+}
+
+.Input select {
+    height: 40px;
+    width: 100%;
+    border: none;
+    padding: 0 30px;
+    border-bottom: 1.6px solid gray;
+    outline: none;
+    background-color: white;
+    font-size: 16px;
+    color:rgb(4, 4, 50);
+    transition: border-color 0.2s ease;
+}
+
+
+.Input select:focus {
+    border-color: rgb(4, 4, 50); 
+}
+.logoutbtn{
+padding: 10px 20px;
+background-color: rgb(4, 67, 54); 
+color: #fff;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+font-size: 16px;}
+.welcome-greeting {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color:transparent;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 200;
+}
+
+.welcome-greeting h1 {
+    margin-bottom: 10px;
+    color: rgb(4, 4, 50);
+}
+
+.welcome-greeting h3 {
+    margin-bottom: 30px;
+    color:black;
+}
+
+#welcomeGreeting button {
+    background-color:rgb(4, 4, 50);
+    color: white;
+    margin-bottom: 60px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

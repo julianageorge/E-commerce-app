@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="stylesheet" href="../admin/style.css">
+    <title>Admin Portal</title>
+</head>
+
+<body>
+<header>
+
+    <input type="checkbox" name="" id="toggler">
+    <label for="toggler" class="fas fa-bars"> </label>
+    <a href="index.html" class="logo">AP<span>.</span></a>
+
+    <nav class="navbar">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="categories.html">Categories</a>
+        <a href="orders.html">Orders</a>
+    </nav>
+
+    <div class="icons">
+        <a href="#" class="fas fa-user"></a>
+    </div>
+</header>
+
+<div class="container">
+    <h2>Product List</h2>
+    <button class="btn" id="add-btn" onclick="window.location.href='addproduct.html'">Add Product</button>
+            <table id="product-list">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Image</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Description</th>
+                        <th>Stock</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+</div>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    let products = JSON.parse(localStorage.getItem('products')) || [];
+    const productTableBody = document.getElementById('product-list').querySelector('tbody');
+
+    function loadProducts() {
+        productTableBody.innerHTML = '';
+        products.forEach(product => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${product.name}</td>
+                <td><img src="${product.image}" alt="${product.name}" width="50"></td>
+                <td>${product.category}</td>
+                <td>${product.price}</td>
+                <td>${product.description}</td>
+                <td>${product.stock}</td>
+                <td class="actions">
+                    <button onclick="editProduct(${product.id})">Edit</button>
+                    <button onclick="deleteProduct(${product.id})">Delete</button>
+                </td>
+            `;
+            productTableBody.appendChild(tr);
+        });
+    }
+
+    window.editProduct = function (id) {
+        window.location.href = 'addproduct.html' + '?id=' + id + '&name=' + products.find(p => p.id == id).name;
+    };
+
+    window.deleteProduct = function (id) {
+        products = products.filter(p => p.id != id);
+        localStorage.setItem('products', JSON.stringify(products));
+        loadProducts();
+    };
+    loadProducts();
+});
+
+</script>
+</html>

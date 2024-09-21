@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css" />
+    <title>Product Details</title>
+  
+</head>
+<body>
+    <nav class="Nav">
+        <div class="nav__header">
+          <div class="nav__logo">
+            <a href="index.html" class="logo">AP<span>.</span></a>
+          </div>
+          <div class="nav_menu_btn" id="menu-btn">
+            <i class="ri-menu-line"></i>
+          </div>
+        </div>
+        <ul class="nav__links" id="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#product-list"> Products</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+          <li><a href="cart.html" onclick="showPage('cart')">Shopping Cart</a></li>
+          <li><a href="favorites.html">Favorites</a></li>
+        </ul>
+        <div class="nav__search" id="nav-search">
+          <select id="choose">
+              <option value="name">Name</option>
+              <option value="category">Category</option>
+              <option value="price">Price</option>
+          </select>
+          <input type="text" placeholder="Search" id="search" />
+          <span><i class="fa-solid fa-magnifying-glass"></i></span>
+      </div>
+      <button class="logoutbtn" id="logout">Logout</button>
+      </nav>
+      <header class="section_container header_container" id="home"> 
+       </header>
+    <div id="detailes"></div>
+    <script>
+        function getUrlParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        const name = getUrlParameter("name");
+        const description = getUrlParameter("description");
+        const price = getUrlParameter("price");
+        const stock = getUrlParameter("stock");
+        const category = getUrlParameter("category");
+        const index = parseInt(getUrlParameter("index"));
+
+        const detailes = document.getElementById("detailes");
+        const products = JSON.parse(localStorage.getItem("products")) || [];
+        const product = products[index];
+
+        if (product) {
+            const info_top = document.createElement("div");
+            info_top.classList.add("info_top");
+
+            const h2 = document.createElement("h2");
+            h2.textContent = decodeURIComponent(name);
+            info_top.appendChild(h2);
+
+            const imgDiv = document.createElement("div");
+            imgDiv.innerHTML = <img src="${product.image}" alt="${product.name}"/>;
+            imgDiv.id = "imgdetails";
+            info_top.appendChild(imgDiv);
+
+           detailes.appendChild(info_top);
+
+            const info_bottom = document.createElement("div");
+            info_bottom.classList.add("info_bottom");
+            detailes.appendChild(info_bottom);
+
+            const pr = document.createElement("p");
+            pr.textContent = "Price: " + decodeURIComponent(price);
+            info_bottom.appendChild(pr);
+
+            const st = document.createElement("p");
+            st.textContent = "Stock: " + decodeURIComponent(stock);
+            info_bottom.appendChild(st);
+
+            const categ = document.createElement("p");
+            categ.textContent = "Category: " + decodeURIComponent(category);
+            info_bottom.appendChild(categ);
+
+            const pre = document.createElement("pre");
+            const descTitle = document.createElement("span");
+            descTitle.textContent = "Description: ";
+            pre.appendChild(descTitle);
+            const p = document.createElement("h4");
+            p.textContent = decodeURIComponent(description);
+            pre.appendChild(p);
+            info_bottom.appendChild(pre);
+        } else {
+            detailes.innerHTML = '<p>Product not found.</p>';
+        }
+    </script>
+    <script src="cart.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

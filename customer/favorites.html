@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Favorites | furni.shop</title>
+</head>
+<body>
+    <nav class="Nav">
+        <div class="nav__header">
+          <div class="nav__logo">
+            <a href="index.html" class="logo">AP<span>.</span></a>
+          </div>
+          <div class="nav__menu__btn" id="menu-btn">
+            <i class="ri-menu-line"></i>
+          </div>
+        </div>
+        <ul class="nav__links" id="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#product-list"> Products</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+          <li><a href="cart.html" onclick="showPage('cart')">Shopping Cart</a></li>
+          <li><a href="favorites.html">Favorites</a></li>
+        </ul>
+        <div class="nav__search" id="nav-search">
+          <select id="choose">
+              <option value="name">Name</option>
+              <option value="category">Category</option>
+              <option value="price">Price</option>
+          </select>
+          <input type="text" placeholder="Search" id="search" />
+          <span><i class="fa-solid fa-magnifying-glass"></i></span>
+      </div>
+      <button class="logoutbtn" id="logout">Logout</button>
+      </nav>
+       <header class="section__container header__container" id="home"> 
+        <h2>Favorites <i class="fa-solid fa-heart" style="color: darkred;"></i></h2>
+      </div>
+       </header>
+    <div class="container" id="favorites"style="display: block;">
+        <div id="favorite-items">
+
+        </div>
+    </div>
+    
+    <script src="main.js"></script>
+<script src="search.js"></script>
+<script src="cart.js"></script>
+<script>
+    const logoutbtn=document.getElementById("logout");
+    logoutbtn.addEventListener("click",(e)=>{
+        e.preventDefault();
+        logout();
+    });
+    function logout(){
+        window.location.href="../login/login.html";
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="Master.css">
+    <title>Login and Registeration Form</title>
+</head>
+<body>
+    <div id="welcomeGreeting" class="welcome-greeting">
+        <h1>Welcome to Our Website!</h1>
+        <h3>We are glad to have you here. Please log in to continue.</h3>
+        <button id="closeGreetingButton">Proceed to Login</button>
+    </div>
+    <header class="head">
+    <nav class="Nav">
+        <a href="#" class="Nav_logo">AP.</a>
+        <button class="login_button" id="open">Login</button>
+    </nav>
+</header>
+<div class="home">   
+    <div class="container">
+        <i class="fa-solid fa-xmark close"></i>
+        <div class="form">
+            <div class="login">
+                <form action="#"> 
+                    <h2 class="title">Login</h2>
+                    <div class="Input"> 
+                    <input type="email" placeholder="Enter your Email" required/>
+                    <i class="fa-solid fa-envelope email"></i>
+                </div>
+                <div class="Input"> 
+                    <input type="password" placeholder="Enter your Password" required/>
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <div class="valid">
+                    <span class="checkbox">
+                        <input type="checkbox" id="check"/>
+                        <label for="check">Remember Me</label>
+                    </span>
+                    <a href="#" class="forget">Forget password?</a>
+                </div>
+                <div class="Input"> 
+                    <select id="userType" required>
+                        <option value="" disabled selected>Select User Type</option>
+                        <option value="admin">Admin</option>
+                        <option value="customer">Customer</option>
+                    </select>
+                </div>
+                <button class="logbutt">
+                    Login Now
+                </button>
+                <div class="signup">
+                    Don't have have an account?
+                    <a href="#" id="signup">Sign up</a>
+                </div>
+                </form>
+            </div>
+            <!--sign up-->
+            <div class="signupform">
+                <form action="#"> 
+                    <h2 class="title">Sign Up</h2>
+                    <div class="Input"> 
+                    <input type="email" placeholder="Enter your Email" required/>
+                    <i class="fa-solid fa-envelope email"></i>
+                </div>
+                <div class="Input"> 
+                    <input type="password" placeholder="Create Password" required/>
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <div class="Input"> 
+                    <input type="password" placeholder="Confirm Password" required/>
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <div class="Input"> 
+    <select id="signupUserType" required>
+        <option value="" disabled selected>Select User Type</option>
+        <option value="admin">Admin</option>
+        <option value="customer">Customer</option>
+    </select>
+</div>
+                <button class="signupbutton">
+                    Sign Up Now
+                </button>
+                <div class="signup">
+                    Already have an account?
+                    <a href="#" id="loginbtn">Login</a>
+                </div>
+                </form>
+            </div>
+        </div>
+        <div class="forgetpass">
+            <form id="forgetpass_form">
+                <h2 class="title">Reset Password</h2>
+                <div class="Input">
+                     <input type="email" placeholder="Enter your Email" id="resetEmail" required />
+                </div>
+                    <button class="resetButton">
+                        Send Reset Link
+                    </button>
+                    <div class="back-to-login">
+                        <a href="#" id="backToLogin">Back to Login</a>
+                        </div>
+            </form>
+        </div>
+    </div>
+    </div>
+    <script src="login.js"></script>
+</body>
+</html>

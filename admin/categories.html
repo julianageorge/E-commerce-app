@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="stylesheet" href="../admin/style.css">
+    <title>Admin Portal</title>
+</head>
+
+<body>
+<header>
+
+    <input type="checkbox" name="" id="toggler">
+    <label for="toggler" class="fas fa-bars"> </label>
+    <a href="index.html" class="logo">AP<span>.</span></a>
+
+    <nav class="navbar">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="categories.html">Categories</a>
+        <a href="orders.html">Orders</a>
+    </nav>
+
+    <div class="icons">
+        <a href="#" class="fas fa-user"></a>
+    </div>
+</header>
+<div class="container">
+    <h2>Category List</h2>
+    <button class="btn" id="add-btn" onclick="window.location.href='addcategory.html'">Add Category</button>
+            <table id="category-list">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+</div>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    let categories = JSON.parse(localStorage.getItem('categories')) || [];
+    const categoryTableBody = document.getElementById('category-list').querySelector('tbody');
+
+    function loadCategories() {
+        categoryTableBody.innerHTML = '';
+        categories.forEach(category => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${category.name}</td>
+                <td class="actions">
+                    <button onclick="editCategory(${category.id})">Edit</button>
+                    <button onclick="deleteCategory(${category.id})">Delete</button>
+                </td>
+            `;
+            categoryTableBody.appendChild(tr);
+        });
+    }
+
+    window.editCategory = function (id) {
+        window.location.href = 'addcategory.html' + '?id=' + id + '&category=' + categories.find(c => c.id == id).name;
+    };
+
+    window.deleteCategory = function (id) {
+        categories = categories.filter(c => c.id != id);
+        localStorage.setItem('categories', JSON.stringify(categories));
+        loadCategories();
+    };
+
+    loadCategories();
+});
+
+</script>
+</html>

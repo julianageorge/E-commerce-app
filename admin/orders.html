@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="stylesheet" href="../admin/style.css">
+    <title>Admin Portal</title>
+</head>
+
+<body>
+<header>
+    <input type="checkbox" name="" id="toggler">
+    <label for="toggler" class="fas fa-bars"></label>
+    <a href="index.html" class="logo">AP<span>.</span></a>
+
+    <nav class="navbar">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="categories.html">Categories</a>
+        <a href="orders.html">Orders</a>
+    </nav>
+
+    <div class="icons">
+        <a href="#" class="fas fa-user"></a>
+    </div>
+</header>
+
+<div class="container">
+    <h2>Orders</h2>
+    <div id="orders-container"></div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const ordersContainer = document.getElementById('orders-container');
+    const orders = JSON.parse(localStorage.getItem('orders')) || [];
+
+    if (orders.length === 0) {
+        ordersContainer.innerHTML = '<p>No orders.</p>';
+        return;
+    }
+
+    orders.forEach((order, index) => {
+        const orderDiv = document.createElement('div');
+        orderDiv.className = 'order';
+        orderDiv.id = `order-${order.id}`;  // Give the order div a unique ID
+        orderDiv.innerHTML = `
+            <h3>Order ID: ${order.id}</h3>
+            <p>Address: ${order.address}</p>
+            <p>Phone: ${order.phone}</p>
+            <p>Total Amount: $${order.totalAmount}</p>
+            <h4>Items:</h4>
+            <ul>
+                ${order.items.map(item => `<li>${item.quantity} x ${item.name} - $${(item.price * item.quantity).toFixed(2)}</li>`).join('')}
+            </ul>
+            <p>Status: <span id="status-${order.id}">${order.status}</span></p>
+            <button class="btn1" onclick="updateOrderStatus(${index}, 'Confirmed')">Confirm</button>
+            <button class="btn2" onclick="rejectOrder(${index})">Reject</button>
+        `;
+        ordersContainer.appendChild(orderDiv);
+    });
+});
+
+function updateOrderStatus(orderIndex, newStatus) {
+    const orders = JSON.parse(localStorage.getItem('orders')) || [];
+    if (orders[orderIndex]) {
+        orders[orderIndex].status = newStatus;
+        localStorage.setItem('orders', JSON.stringify(orders)); // Update localStorage
+        document.getElementById(`status-${orders[orderIndex].id}`).textContent = newStatus;
+        alert(`Order status updated to ${newStatus}`);
+    } else {
+        alert('Order not found.');
+    }
+}
+
+function rejectOrder(orderIndex) {
+    const orders = JSON.parse(localStorage.getItem('orders')) || [];
+    if (orders[orderIndex]) {
+        orders[orderIndex].status = 'Rejected';
+        localStorage.setItem('orders', JSON.stringify(orders)); // Update localStorage
+        document.getElementById(`status-${orders[orderIndex].id}`).textContent = 'Rejected';
+        
+        setTimeout(() => {
+            document.getElementById(`order-${orders[orderIndex].id}`).remove(); // Remove from orders page after 3 seconds
+        }, 3000);
+        
+        alert('Order has been rejected and will be removed.');
+    } else {
+        alert('Order not found.');
+    }
+}
+</script>
+</body>
+</html>

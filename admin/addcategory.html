@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="stylesheet" href="../admin/style.css">
+    <title>Admin Portal</title>
+</head>
+
+<body>
+<header>
+
+    <input type="checkbox" name="" id="toggler">
+    <label for="toggler" class="fas fa-bars"> </label>
+    <a href="index.html" class="logo">AP<span>.</span></a>
+
+    <nav class="navbar">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="categories.html">Categories</a>
+        <a href="orders.html">Orders</a>
+    </nav>
+
+    <div class="icons">
+        <a href="#" class="fas fa-user"></a>
+    </div>
+</header>
+
+<div class="container">
+    <div class="form-container">
+        <h2>Manage Categories</h2>
+        <form id="category-form">
+            <input type="hidden" id="category-id">
+            <div class="form-group">
+                <label for="category-name">Category Name</label>
+                <input type="text" id="category-name" required>
+                <span class="error-message" id="category-name-error"></span>
+            </div>
+            <button type="submit">Save Category</button>
+        </form>
+    </div>
+</div>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('id') && urlParams.has('category')){
+        const id = urlParams.get('id');
+        const category = urlParams.get('category');
+        document.getElementById('category-id').value = id;
+        document.getElementById('category-name').value = category;
+    }
+    let categories = JSON.parse(localStorage.getItem('categories')) || [];
+    const categoryForm = document.getElementById('category-form');
+
+    function showError(input, message) {
+        const errorElement = document.getElementById(`${input.id}-error`);
+        errorElement.textContent = message;
+        errorElement.style.display = 'block';
+        input.classList.add('error');
+    }
+
+    function clearError(input) {
+        const errorElement = document.getElementById(`${input.id}-error`);
+        errorElement.textContent = '';
+        errorElement.style.display = 'none';
+        input.classList.remove('error');
+    }
+
+    function validateCategoryForm() {
+        const name = document.getElementById('category-name');
+        let isValid = true;
+
+        if (!name.value.trim()) {
+            showError(name, 'Category name is required.');
+            isValid = false;
+        } else if (categories.some(category => category.name.toLowerCase() === name.value.trim().toLowerCase())) {
+            showError(name, 'Category name must be unique.');
+            isValid = false;
+        } else if (!isNaN(name.value.trim())) {
+            showError(name, 'Category name must be a valid string.');
+            isValid = false;
+        }
+        else {
+            clearError(name);
+        }
+
+        return isValid;
+    }
+
+    categoryForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        if (!validateCategoryForm()) return;
+
+        const id = document.getElementById('category-id').value;
+        const name = document.getElementById('category-name').value.trim();
+
+        if (id) {
+            const category = categories.find(c => c.id == id);
+            category.name = name;
+        } else {
+            const newCategory = {
+                id: Date.now(),
+                name
+            };
+            categories.push(newCategory);
+        }
+
+        localStorage.setItem('categories', JSON.stringify(categories));
+        window.location.href = 'categories.html';
+    });
+});
+
+</script>
+</html>
